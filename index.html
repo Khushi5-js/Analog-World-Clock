@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Neon World Clock — Clock · Alarm · Stopwatch</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <div class="dot"></div>
+        <h1>Neon World Clock</h1>
+      </div>
+
+      <div class="controls">
+        <button id="searchBtn" class="icon-btn" title="Search timezone">🔎</button>
+        <button id="alarmBtn" class="icon-btn" title="Alarm">⏰</button>
+        <button id="stopwatchBtn" class="icon-btn" title="Stopwatch">⏱</button>
+      </div>
+    </header>
+
+    <section class="content">
+      <div class="card clock-card">
+        <div class="clock-left">
+          <div class="analog-face" id="analogFace">
+            <!-- decorative ticks created in CSS/JS -->
+            <div class="hands">
+              <div id="hourHand" class="hand hour"></div>
+              <div id="minuteHand" class="hand minute"></div>
+              <div id="secondHand" class="hand second"></div>
+              <div class="center"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="clock-right">
+          <div class="time-big" id="timeText">--:--:--</div>
+          <div class="date-text" id="dateText">Loading date...</div>
+          <div class="tz-text">Timezone: <span id="tzText">Local</span></div>
+          <div class="hint">Tip: Click 🔎 then type city (e.g. "Kolkata", "New York") or IANA timezone (e.g. "Asia/Kolkata").</div>
+        </div>
+      </div>
+
+      <div class="card side-card">
+        <div class="section">
+          <h3>Alarms</h3>
+          <label>Alarm time (HH:MM)</label>
+          <input id="alarmTime" type="time" />
+          <label>Alarm timezone</label>
+          <select id="alarmTz"></select>
+          <div class="row">
+            <button id="setAlarmBtn" class="btn primary">Set Alarm</button>
+            <button id="stopAlarmBtn" class="btn danger">Stop</button>
+          </div>
+          <div id="alarmsList" class="items"></div>
+        </div>
+
+        <hr/>
+
+        <div class="section">
+          <h3>Stopwatch</h3>
+          <div id="swDisplay" class="sw-display">00:00:00.000</div>
+          <div class="row">
+            <button id="swStartBtn" class="btn primary">Start</button>
+            <button id="swLapBtn" class="btn">Lap</button>
+            <button id="swStopBtn" class="btn danger">Stop</button>
+            <button id="swResetBtn" class="btn alt">Reset</button>
+          </div>
+          <div id="laps" class="items"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Search modal -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-panel">
+      <button id="closeModal" class="close-x">✖</button>
+      <h2>Find timezone</h2>
+      <input id="search" class="search" placeholder="Type city, country or timezone (e.g. Kolkata, Europe/London)" />
+      <div id="suggestions" class="suggestions"></div>
+      <div class="modal-foot">
+        <button id="useLocal" class="btn ghost">Use local</button>
+        <button id="apply" class="btn primary">Apply</button>
+      </div>
+      <div id="msg" class="msg"></div>
+    </div>
+  </div>
+
+  <!-- alarm audio -->
+  <audio id="alarmSound" preload="auto">
+    <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
